@@ -1,7 +1,6 @@
 package com.zy.netty.server;
 
-import com.zy.netty.handler.DiscardServerHandler;
-import com.zy.netty.handler.EchoServerHandler;
+import com.zy.netty.handler.TimeEncoder;
 import com.zy.netty.handler.TimeServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -31,7 +30,7 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(final SocketChannel channel) throws Exception {
-                        channel.pipeline().addLast(new TimeServerHandler());
+                        channel.pipeline().addLast(new TimeEncoder(), new TimeServerHandler());
                     }
                 })
                 .option(ChannelOption.SO_BACKLOG, 128)

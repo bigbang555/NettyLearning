@@ -1,6 +1,7 @@
 package com.zy.netty.client;
 
 import com.zy.netty.handler.TimeClientHandler;
+import com.zy.netty.handler.TimeDecoder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -23,7 +24,7 @@ public class TimeClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(final SocketChannel channel) throws Exception {
-                        channel.pipeline().addLast(new TimeClientHandler());
+                        channel.pipeline().addLast(new TimeDecoder(), new TimeClientHandler());
                     }
                 });
 
@@ -32,7 +33,7 @@ public class TimeClient {
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             worker.shutdownGracefully();
         }
 
