@@ -14,7 +14,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 public class TimeClient {
 
     public static void main(String[] args) {
-        String ip = "192.168.0.113";
+        String ip = "localhost";
         int port = 8080;
         EventLoopGroup worker = new NioEventLoopGroup();
         Bootstrap client = new Bootstrap();
